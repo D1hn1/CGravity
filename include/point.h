@@ -9,5 +9,6 @@ typedef struct {
 	Color color;
 	float x_velocity;
 	float y_velocity;
+	bool fixed;
 } Point;
 

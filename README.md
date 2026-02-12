@@ -2,10 +2,11 @@
 ![CGravity](./CGravity.png)
 
 # Ussage
-- Click either on the circle or the rectangle to select them.
+- Click either on the circle, the rectangle, or "spring" to select them.
 - Click on the "canvas" to draw them.
-- TODO: Right click to repeal them.
+- Right click to repeal them.
 - The number of shapes on the screen appears on the top.
+- Numbers 1 & 2 control the gravity and the anchor points.
 
 # About
 - Made using raylib
