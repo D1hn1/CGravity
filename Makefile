@@ -1,9 +1,11 @@
-main: ./src/main.c ./src/point.c ./src/array.c
+SRCS := $(wildcard ./src/*.c)
+
+bin/main: $(SRCS)
 	mkdir -p bin
 	cc -Wall -Wextra \
 	-I./include \
 	-L./lib \
 	-Wl,-rpath,'$(PWD)/lib' \
-	./src/main.c ./src/point.c ./src/array.c \
+	$(SRCS) \
 	-lraylib -lm -ldl -lpthread -lGL -lX11 \
 	-o ./bin/main

@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "point.h"
 
 typedef struct {
 	Vector2 p1;

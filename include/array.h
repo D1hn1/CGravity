@@ -3,6 +3,8 @@
 #include "rect.h"
 #include "spring.h"
 
+#pragma once
+
 typedef enum {
 	OBJ_POINT,
 	OBJ_RECT,
