@@ -6,6 +6,7 @@ typedef struct {
 	Vector2 p2;
 	float thick;
 	float strength;
+	float original_length;
 	Color color;
 
 	bool p1_blocked;

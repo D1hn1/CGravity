@@ -18,6 +18,11 @@ void spring_logic(Object *object, darray *array) {
 							actual_spring->p2_point = actual_point;
 							actual_spring->p2_blocked = true;
 							DRAWING_SPRING = false;
+							// Calculate original length
+							float dx = actual_spring->p1.x - actual_spring->p2.x;
+							float dy = actual_spring->p1.y - actual_spring->p2.y;
+							float original = hypot(dx, dy);
+							actual_spring->original_length = original;
 						}
 
 					}
@@ -41,10 +46,7 @@ void update_spring(Object *object) {
 				float dy = actual_spring->p2.y - actual_spring->p1.y;
 					
 				float distance = hypot(dx, dy);
-				// TODO: INTRODUCE ORIGINAL LENGTH ./springs.c:29 <- where the code should be
-				// 		 REPLACING THE "100" WITH THE LENGTH
-				// 		 FROM THE P1 TO P2 INSIDE THE SPRING OBJ.
-				float displacement = 100 - distance;
+				float displacement = actual_spring->original_length - distance;
 
 				float force = actual_spring->strength * displacement;
 				float fx = (dx / distance) * force;
