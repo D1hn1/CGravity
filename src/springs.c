@@ -54,15 +54,15 @@ void update_spring(Object *object) {
 
 				if (actual_spring->p1_blocked) {
 					if (!actual_spring->p1_point->fixed) {
-						actual_spring->p1_point->x_velocity -= fx - DAMPING;
-						actual_spring->p1_point->y_velocity -= fy - DAMPING;
+						actual_spring->p1_point->x_velocity -= fx * DAMPING;
+						actual_spring->p1_point->y_velocity -= fy * DAMPING;
 					}
 				}
 
 				if (actual_spring->p2_blocked) {
 					if (!actual_spring->p2_point->fixed) {
-						actual_spring->p2_point->x_velocity += fx - DAMPING;
-						actual_spring->p2_point->y_velocity += fy - DAMPING;
+						actual_spring->p2_point->x_velocity += fx * DAMPING;
+						actual_spring->p2_point->y_velocity += fy * DAMPING;
 					}
 				}
 			}

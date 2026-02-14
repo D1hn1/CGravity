@@ -23,8 +23,8 @@ void update_velocity(Object *object, float delta) {
 				// X - Velocity
 				if (actual_point->y <= (GetScreenHeight() + 10))
 					actual_point->x_velocity *= FRICTION;
-				if (fabs(actual_point->x_velocity) < RESTITUTION_X)
-					actual_point->x_velocity = 0;
+				//if (fabs(actual_point->x_velocity) < RESTITUTION_X)
+				//	actual_point->x_velocity = 0;
 			}
 		} else {
 			return;
