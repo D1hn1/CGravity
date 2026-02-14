@@ -11,10 +11,12 @@
 
 // -**- TODO -**-
 //
-// [ DONE.  ] RESOLVE COLLISIONS WITH RECT - RECT
-// [ DOING. ] RESOLVE COLLISIONS WITH RECT - POINT
-// [ DOING. ] ADD SPRINGS -> https://github.com/Luke23-45/Coding-a-Spring-Physics-Simulation/blob/main/sp.cc
-// [        ] REPEAL THE RECTS
+// [ DOING. ] ADD SPRINGS -> https://github.com/Luke23-45/Coding-a-Spring-Physics-Simulation/blob/main/sp.cc.
+// [ DONE.  ] RESOLVE COLLISIONS WITH RECT - RECT.
+// [        ] RESOLVE COLLISIONS WITH RECT - POINT.
+// [        ] REPEAL THE RECTS.
+// [        ] ADD A MECHANISM TO DELETE OBJECTS ON SCREEN.
+// [ DONE?. ] FIX THE ACUMULATION OF ENERGY ON ANCHOR POINTS.
 
 #define FPS 120 
 #define WINDOW_TITLE "Gravity on C"
@@ -71,28 +73,8 @@ int main ()
 
 		}
 
-		// -*-*- Questionable code -*-*-
-		// Gravity text
-		const char *gravtext = "";
-		if (!IS_GRAVITY) {
-			gravtext = "(1) GRAVITY: OFF";
-		} else {
-			gravtext = "(1) GRAVITY: ON";
-		}
-		// Fixed text
-		const char *fixtext = "";
-		if (!IS_FIXED) {
-			fixtext = "(2) FIXED: OFF";
-		} else {
-			fixtext = "(2) FIXED: ON";
-		}
-		// N of points
-		char str[50];
-		sprintf(str, "%zu", points.length);
-		DrawText(str, 30, 10, 30, BLACK);
-		DrawText(gravtext, 30, 50, 30, BLACK);
-		DrawText(fixtext, 30, 90, 30, BLACK);
-		// -*-*- Questionable code -*-*-
+		// Draw top left info
+		draw_info(points.length);
 		
 		// Change gravity
 		if (IsKeyPressed(KEY_ONE)) 
@@ -102,6 +84,11 @@ int main ()
 			IS_FIXED = switch_fixed();
 		
 		// Menu for selecting shape
+		// TODO: Fix so the spring draws on the first click.
+		// 		 Right now it creates on the first and then draws on the second becouse
+		// 		 	of the checkbox collision detection.
+		// 		 Fix the problem that you can not create another spring if one is out
+		// 		 	of screen or bugged out.
 		bool selecting_shape = menu_shapes();
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 			if (!selecting_shape) {

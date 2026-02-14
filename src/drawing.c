@@ -34,8 +34,8 @@ bool menu_shapes(void) {
 		.height = rect_siz.y,
 	};
 	// Spring cords
-	Vector2 springp1 = {GetScreenWidth() - 160, 5};
-	Vector2 springp2 = {GetScreenWidth() - 160, 50};
+	Vector2 springp1 = {GetScreenWidth() - 160, rect.y};
+	Vector2 springp2 = {GetScreenWidth() - 160, (rect.y + rect.height)};
 	// Draw them
 	Color circlec = RED;
 	Color rectanc = RED;
@@ -62,4 +62,21 @@ bool menu_shapes(void) {
 		}
 	}
 	return false;
+}
+
+void draw_info(size_t npoints) {
+	// Define vars
+	char str[50];
+	sprintf(str, "%zu", npoints); 
+	const char *gravtext = "(1) GRAVITY: ON";
+	const char *fixtext = "(2) FIXED: ON";
+	// Change bool
+	if (!IS_GRAVITY)
+		gravtext = "(1) GRAVITY: OFF";
+	if (!IS_FIXED)
+		fixtext = "(2) FIXED: OFF";
+	// Draw text
+	DrawText(str, 30, 10, 30, BLACK);
+	DrawText(gravtext, 30, 50, 30, BLACK);
+	DrawText(fixtext, 30, 90, 30, BLACK);
 }

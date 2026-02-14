@@ -52,7 +52,10 @@ void update_spring(Object *object) {
 				float dy = actual_spring->p2.y - actual_spring->p1.y;
 					
 				float distance = hypot(dx, dy);
-				float displacement = 10 - distance;
+				// TODO: INTRODUCE ORIGINAL LENGTH ./springs.c:29 <- where the code should be
+				// 		 REPLACING THE "100" WITH THE LENGTH
+				// 		 FROM THE P1 TO P2 INSIDE THE SPRING OBJ.
+				float displacement = 100 - distance;
 
 				float force = actual_spring->strength * displacement;
 				float fx = (dx / distance) * force;

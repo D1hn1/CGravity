@@ -8,4 +8,5 @@ bool switch_gravity(void);
 bool switch_fixed(void);
 void draw(Object *object);
 bool menu_shapes(void);
+void draw_info(size_t npoints);
 #endif // DRAWING_H

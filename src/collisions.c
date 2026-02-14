@@ -123,14 +123,16 @@ void check_collision(Object *actual_object, Object *inter_object) {
 void repeal_circle(Object *object) {
 	if (object->type == OBJ_POINT) {
 		Point *inter_point = object->as.point;
-		Vector2 inter_point_cords = {inter_point->x, inter_point->y};
-		Vector2 mouseV = {GetMouseX(), GetMouseY()};
-		if (CheckCollisionCircles(mouseV, 100.0f, inter_point_cords, inter_point->radius)) {
-			Vector2 deltM = {inter_point->x - mouseV.x, inter_point->y - mouseV.y};
-			float distanceM = sqrt(deltM.x * deltM.x + deltM.y * deltM.y);
-			Vector2 normalM = {deltM.x / distanceM, deltM.y / distanceM};
-			inter_point->x_velocity += normalM.x * 10.0f;
-			inter_point->y_velocity += normalM.y * 10.0f;
+		if (!inter_point->fixed) {
+			Vector2 inter_point_cords = {inter_point->x, inter_point->y};
+			Vector2 mouseV = {GetMouseX(), GetMouseY()};
+			if (CheckCollisionCircles(mouseV, 100.0f, inter_point_cords, inter_point->radius)) {
+				Vector2 deltM = {inter_point->x - mouseV.x, inter_point->y - mouseV.y};
+				float distanceM = sqrt(deltM.x * deltM.x + deltM.y * deltM.y);
+				Vector2 normalM = {deltM.x / distanceM, deltM.y / distanceM};
+				inter_point->x_velocity += normalM.x * 10.0f;
+				inter_point->y_velocity += normalM.y * 10.0f;
+			}
 		}
 	} else {
 		return;
