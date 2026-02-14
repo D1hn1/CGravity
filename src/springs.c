@@ -4,21 +4,11 @@ void spring_logic(Object *object, darray *array) {
 	if (object->type == OBJ_SPRING) {
 		Spring *actual_spring = object->as.spring;
 		if (!actual_spring->p1_blocked || !actual_spring->p2_blocked) {
-			// Move p1
-			if (!actual_spring->p1_blocked) {
-				actual_spring->p1.x = GetMouseX();
-				actual_spring->p1.y = GetMouseY();
-			}
-			// Move p2
-			if (!actual_spring->p2_blocked) {
-				actual_spring->p2.x = GetMouseX();
-				actual_spring->p2.y = GetMouseY();
-			}
+			// If they are not blocked check collisions		
 			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && (DRAWING == OBJ_SPRING)) {
 				for (size_t i = 0; i < array->length; i++) {
 					Object *actual_object = darray_at(array, i);
 					if (actual_object->type == OBJ_POINT) {
-
 						Point *actual_point = actual_object->as.point;
 						Vector2 point_cords = {actual_point->x, actual_point->y};
 						if (CheckCollisionPointCircle(actual_spring->p1, point_cords, actual_point->radius) && !actual_spring->p1_blocked) {
@@ -42,12 +32,11 @@ void spring_logic(Object *object, darray *array) {
 
 void update_spring(Object *object) {
 	// TODO: REFINE THE SPRING FORMULA
-	if (IS_GRAVITY) {
-		if (object->type == OBJ_SPRING) {
-
-			Spring *actual_spring = object->as.spring;
-			if (actual_spring->p1_blocked && actual_spring->p2_blocked) {
-
+	if (object->type == OBJ_SPRING) {
+		// Get actual spring
+		Spring *actual_spring = object->as.spring;
+		if (actual_spring->p1_blocked && actual_spring->p2_blocked) {
+			if (IS_GRAVITY) {
 				float dx = actual_spring->p2.x - actual_spring->p1.x;
 				float dy = actual_spring->p2.y - actual_spring->p1.y;
 					
@@ -74,7 +63,18 @@ void update_spring(Object *object) {
 						actual_spring->p2_point->y_velocity += fy - DAMPING;
 					}
 				}
+			}
 
+		} else {
+			// Move p1
+			if (!actual_spring->p1_blocked) {
+				actual_spring->p1.x = GetMouseX();
+				actual_spring->p1.y = GetMouseY();
+			}
+			// Move p2
+			if (!actual_spring->p2_blocked) {
+				actual_spring->p2.x = GetMouseX();
+				actual_spring->p2.y = GetMouseY();
 			}
 		}
 	}

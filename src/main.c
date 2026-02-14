@@ -40,7 +40,6 @@ int main ()
 			Object *actual_object = darray_at(&points, i);
 
 			// Check springs
-			spring_logic(actual_object, &points);
 			update_spring(actual_object);
 
 			// Update velocity of objects
@@ -84,24 +83,25 @@ int main ()
 			IS_FIXED = switch_fixed();
 		
 		// Menu for selecting shape
-		// TODO: Fix so the spring draws on the first click.
-		// 		 Right now it creates on the first and then draws on the second becouse
-		// 		 	of the checkbox collision detection.
-		// 		 Fix the problem that you can not create another spring if one is out
-		// 		 	of screen or bugged out.
 		bool selecting_shape = menu_shapes();
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 			if (!selecting_shape) {
-				if (DRAWING == OBJ_POINT) {
+				if (DRAWING == OBJ_POINT && !DRAWING_SPRING) {
 					Object newPoint = add_point(IS_FIXED);
 					darray_push(&points, newPoint);
-				} else if (DRAWING == OBJ_RECT) {
+				} else if (DRAWING == OBJ_RECT && !DRAWING_SPRING) {
 					Object newRect = add_rect();
 					darray_push(&points, newRect);
-				} else if ((DRAWING == OBJ_SPRING) && !DRAWING_SPRING) {
+				} else if (DRAWING == OBJ_SPRING) {
+					// Create new Spring
+					if (!DRAWING_SPRING) {
+						Object newSpring = add_spring();
+						darray_push(&points, newSpring);
+					}
 					DRAWING_SPRING = true;
-					Object newSpring = add_spring();
-					darray_push(&points, newSpring);
+					// Check for snapping to a point
+					Object *last_object = darray_at(&points, points.length - 1);
+					spring_logic(last_object, &points);
 				}
 			}
 		}

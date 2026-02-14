@@ -76,7 +76,7 @@ void draw_info(size_t npoints) {
 	if (!IS_FIXED)
 		fixtext = "(2) FIXED: OFF";
 	// Draw text
-	DrawText(str, 30, 10, 30, BLACK);
-	DrawText(gravtext, 30, 50, 30, BLACK);
-	DrawText(fixtext, 30, 90, 30, BLACK);
+	DrawText(str, 10, 10, 30, BLACK);
+	DrawText(gravtext, 10, 50, 30, BLACK);
+	DrawText(fixtext, 10, 90, 30, BLACK);
 }

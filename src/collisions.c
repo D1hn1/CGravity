@@ -69,9 +69,11 @@ void delete_off_screen(Object *object, darray *points, size_t index) {
 		Spring *actual_spring = object->as.spring;
 		if ((actual_spring->p1.x < 0) || (actual_spring->p1.y < 0) || (actual_spring->p2.x < 0) || (actual_spring->p2.y < 0)) {
 			darray_delete(points, index);
+			if (DRAWING_SPRING) DRAWING_SPRING = false;
 		}
 		if ((actual_spring->p1.x > GetScreenWidth()) || (actual_spring->p1.y > GetScreenHeight()) || (actual_spring->p2.x > GetScreenWidth()) || (actual_spring->p2.y > GetScreenHeight())) {
 			darray_delete(points, index);
+			if (DRAWING_SPRING) DRAWING_SPRING = false;
 		}
 	} else {
 		return;
