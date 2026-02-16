@@ -38,13 +38,13 @@ void check_boundaries(Object *object) {
 		if (CheckCollisionCircleLine(actual_point_cords, actual_point->radius, wallL_p1, wallL_p2)) {
 			actual_point->x_velocity *= -actual_point->elasticity;
 			actual_point->x = wallL_p1.x + actual_point->radius;
-			actual_point->x_velocity = -actual_point->x_velocity * FRICTION;
+			//actual_point->x_velocity = -actual_point->x_velocity * FRICTION;
 		}
 		// Check right wall
 		if (CheckCollisionCircleLine(actual_point_cords, actual_point->radius, wallR_p1, wallR_p2)) {
 			actual_point->x_velocity *= -actual_point->elasticity;
 			actual_point->x = wallR_p1.x - actual_point->radius;
-			actual_point->x_velocity = -actual_point->x_velocity * FRICTION;
+			//actual_point->x_velocity = -actual_point->x_velocity * FRICTION;
 		}
 		// Check top
 		if (CheckCollisionCircleLine(actual_point_cords, actual_point->radius, top_p1, top_p2)) {
