@@ -63,7 +63,7 @@ Object add_spring(void) {
 		.p1 = mouse_cords,
 		.p2 = mouse_cords,
 		.thick = 5.0f,
-		.strength = 0.90f,
+		.strength = 0.010f,
 		.color = BLACK,
 		.p1_blocked = false,
 		.p2_blocked = false,

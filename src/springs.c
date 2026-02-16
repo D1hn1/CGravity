@@ -36,35 +36,41 @@ void spring_logic(Object *object, darray *array) {
 }
 
 void update_spring(Object *object) {
-	// TODO: REFINE THE SPRING FORMULA
 	if (object->type == OBJ_SPRING) {
 		// Get actual spring
 		Spring *actual_spring = object->as.spring;
 		if (actual_spring->p1_blocked && actual_spring->p2_blocked) {
 			if (IS_GRAVITY) {
-				float dx = actual_spring->p2.x - actual_spring->p1.x;
-				float dy = actual_spring->p2.y - actual_spring->p1.y;
-					
-				float distance = hypot(dx, dy);
-				float displacement = actual_spring->original_length - distance;
 
-				float force = actual_spring->strength * displacement;
-				float fx = (dx / distance) * force;
-				float fy = (dy / distance) * force;
+				Vector2 direction = Vector2Subtract(actual_spring->p1, actual_spring->p2);
+				float distance = Vector2Length(direction);
+				float x = actual_spring->original_length - distance;
+
+				direction.x *= actual_spring->strength * x;
+				direction.y *= actual_spring->strength * x;
 
 				if (actual_spring->p1_blocked) {
 					if (!actual_spring->p1_point->fixed) {
-						actual_spring->p1_point->x_velocity -= fx * DAMPING;
-						actual_spring->p1_point->y_velocity -= fy * DAMPING;
+						actual_spring->p1_point->x_velocity += direction.x;
+						actual_spring->p1_point->y_velocity += direction.y;
+						actual_spring->p1_point->x_velocity *= DAMPING;
+						actual_spring->p1_point->y_velocity *= DAMPING;
+					}
+				}
+				
+				direction = Vector2Negate(direction);
+				
+				if (actual_spring->p2_blocked) {
+					if (!actual_spring->p2_point->fixed) {
+						actual_spring->p2_point->x_velocity += direction.x;
+						actual_spring->p2_point->y_velocity += direction.y;
+						actual_spring->p2_point->x_velocity *= DAMPING;
+						actual_spring->p2_point->y_velocity *= DAMPING;
 					}
 				}
 
-				if (actual_spring->p2_blocked) {
-					if (!actual_spring->p2_point->fixed) {
-						actual_spring->p2_point->x_velocity += fx * DAMPING;
-						actual_spring->p2_point->y_velocity += fy * DAMPING;
-					}
-				}
+				
+
 			}
 
 		} else {
