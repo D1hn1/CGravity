@@ -80,6 +80,34 @@ void delete_off_screen(Object *object, darray *points, size_t index) {
 	}
 }
 
+void delete_on_cursor(darray *array, Vector2 mcords) {
+	for (size_t i = 0; i < array->length; i++) {
+		Object *object = darray_at(array, i);
+		if (object->type == OBJ_POINT) {
+			Point *point = object->as.point;
+			Vector2 point_cords = {point->x, point->y};
+			if (CheckCollisionPointCircle(mcords, point_cords, point->radius)) {
+				darray_delete(array, i);
+			}
+
+		} else if (object->type == OBJ_RECT) {
+			Rect *rect = object->as.rect;
+			if (CheckCollisionPointRec(mcords, rect->rec)) {
+				darray_delete(array, i);
+			}
+
+		} else if (object->type == OBJ_SPRING) {
+			Spring *spring = object->as.spring;
+			if (CheckCollisionPointLine(mcords, spring->p1, spring->p2, 5)) {
+				darray_delete(array, i);
+			}
+
+		} else {
+			return;
+		}
+	}
+};
+
 void check_collision(Object *actual_object, Object *inter_object) {
 	if ((actual_object->type == OBJ_POINT) && (inter_object->type == OBJ_POINT)) {
 		Point *actual_point = actual_object->as.point;

@@ -7,6 +7,7 @@
 #define COLLISION_H
 void check_boundaries(Object *object);
 void delete_off_screen(Object *object, darray *points, size_t index);
+void delete_on_cursor(darray *array, Vector2 mcords);
 void check_collision(Object *actual_object, Object *inter_object);
 void repeal_circle(Object *object);
 #endif // COLLISION_H

@@ -11,11 +11,11 @@
 
 // -**- TODO -**-
 //
-// [ DOING. ] ADD SPRINGS -> https://github.com/Luke23-45/Coding-a-Spring-Physics-Simulation/blob/main/sp.cc.
+// [ DONE.  ] ADD A MECHANISM TO DELETE OBJECTS ON SCREEN.
+// [ DONE?. ] ADD SPRINGS -> https://github.com/Luke23-45/Coding-a-Spring-Physics-Simulation/blob/main/sp.cc.
 // [ DONE.  ] RESOLVE COLLISIONS WITH RECT - RECT.
 // [        ] RESOLVE COLLISIONS WITH RECT - POINT.
 // [        ] REPEAL THE RECTS.
-// [        ] ADD A MECHANISM TO DELETE OBJECTS ON SCREEN.
 // [ DONE?. ] FIX THE ACUMULATION OF ENERGY ON ANCHOR POINTS.
 
 #define FPS 120 
@@ -84,7 +84,7 @@ int main ()
 		
 		// Menu for selecting shape
 		bool selecting_shape = menu_shapes();
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !IsKeyDown(KEY_LEFT_SHIFT)) {
 			if (!selecting_shape) {
 				if (DRAWING == OBJ_POINT && !DRAWING_SPRING) {
 					Object newPoint = add_point(IS_FIXED);
@@ -104,6 +104,11 @@ int main ()
 					spring_logic(last_object, &points);
 				}
 			}
+		} else if (IsKeyDown(KEY_LEFT_SHIFT) && IsMouseButtonDown(MOUSE_BUTTON_LEFT) && !DRAWING_SPRING) {
+			// Get mouse cords
+			Vector2 mcords = {GetMouseX(), GetMouseY()};
+			// Delete on mouse objects
+			delete_on_cursor(&points, mcords);
 		}
 
 		ClearBackground(WHITE);
