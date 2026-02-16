@@ -12,6 +12,7 @@
 // -**- TODO -**-
 //
 // [ DONE.  ] ADD A MECHANISM TO DELETE OBJECTS ON SCREEN.
+// [ DONE.  ] DRAW LINES FROM THE WALLS TO THE CURSOR.
 // [ DONE?. ] ADD SPRINGS -> https://github.com/Luke23-45/Coding-a-Spring-Physics-Simulation/blob/main/sp.cc.
 // [ DONE.  ] RESOLVE COLLISIONS WITH RECT - RECT.
 // [        ] RESOLVE COLLISIONS WITH RECT - POINT.
@@ -72,6 +73,10 @@ int main ()
 
 		}
 
+		// Draw cursor lines
+		if (CURSOR_LINES) 
+			draw_cursor_lines();
+
 		// Draw top left info
 		draw_info(points.length);
 		
@@ -81,6 +86,9 @@ int main ()
 		// Change fixed
 		if (IsKeyPressed(KEY_TWO))
 			IS_FIXED = switch_fixed();
+		// Change cursor lines
+		if (IsKeyPressed(KEY_THREE))
+			CURSOR_LINES = switch_cursor_lines();
 		
 		// Menu for selecting shape
 		bool selecting_shape = menu_shapes();

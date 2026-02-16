@@ -15,4 +15,5 @@ extern ObjectType DRAWING;
 extern bool IS_FIXED;
 extern bool IS_GRAVITY;
 extern bool DRAWING_SPRING;
+extern bool CURSOR_LINES;
 #endif // GLOBAL_H

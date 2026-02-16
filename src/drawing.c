@@ -2,6 +2,7 @@
 
 bool switch_gravity(void) { return !IS_GRAVITY; };
 bool switch_fixed(void) { return !IS_FIXED; };
+bool switch_cursor_lines(void) { return !CURSOR_LINES; };
 
 void draw(Object *object) {
 	if (object->type == OBJ_RECT) {
@@ -70,13 +71,25 @@ void draw_info(size_t npoints) {
 	sprintf(str, "%zu", npoints); 
 	const char *gravtext = "(1) GRAVITY: ON";
 	const char *fixtext = "(2) FIXED: ON";
+	const char *linestext = "(3) LINES: ON";
 	// Change bool
 	if (!IS_GRAVITY)
 		gravtext = "(1) GRAVITY: OFF";
 	if (!IS_FIXED)
 		fixtext = "(2) FIXED: OFF";
+	if (!CURSOR_LINES)
+		linestext = "(3) LINES: OFF";
 	// Draw text
 	DrawText(str, 10, 10, 30, BLACK);
 	DrawText(gravtext, 10, 50, 30, BLACK);
 	DrawText(fixtext, 10, 90, 30, BLACK);
+	DrawText(linestext, 10, 130, 30, BLACK);
+}
+
+void draw_cursor_lines() {
+	Color line_color = RED;
+	DrawLine(GetMouseX(), GetMouseY(), 0, GetMouseY(), line_color);
+	DrawLine(GetMouseX(), GetMouseY(), GetMouseX(), 0, line_color);
+	DrawLine(GetMouseX(), GetMouseY(), GetScreenWidth(), GetMouseY(), line_color);
+	DrawLine(GetMouseX(), GetMouseY(), GetMouseX(), GetScreenHeight(), line_color);
 }
