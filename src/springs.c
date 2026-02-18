@@ -35,7 +35,7 @@ void spring_logic(Object *object, darray *array) {
 	}
 }
 
-void update_spring(Object *object) {
+void update_spring(Object *object, float dt) {
 	if (object->type == OBJ_SPRING) {
 		// Get actual spring
 		Spring *actual_spring = object->as.spring;
@@ -51,8 +51,8 @@ void update_spring(Object *object) {
 
 				if (actual_spring->p1_blocked) {
 					if (!actual_spring->p1_point->fixed) {
-						actual_spring->p1_point->x_velocity += direction.x;
-						actual_spring->p1_point->y_velocity += direction.y;
+						actual_spring->p1_point->x_velocity += direction.x * dt;
+						actual_spring->p1_point->y_velocity += direction.y * dt;
 						actual_spring->p1_point->x_velocity *= DAMPING;
 						actual_spring->p1_point->y_velocity *= DAMPING;
 					}
@@ -62,8 +62,8 @@ void update_spring(Object *object) {
 				
 				if (actual_spring->p2_blocked) {
 					if (!actual_spring->p2_point->fixed) {
-						actual_spring->p2_point->x_velocity += direction.x;
-						actual_spring->p2_point->y_velocity += direction.y;
+						actual_spring->p2_point->x_velocity += direction.x * dt;
+						actual_spring->p2_point->y_velocity += direction.y * dt;
 						actual_spring->p2_point->x_velocity *= DAMPING;
 						actual_spring->p2_point->y_velocity *= DAMPING;
 					}

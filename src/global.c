@@ -12,4 +12,4 @@ ObjectType DRAWING = OBJ_POINT;
 bool IS_FIXED = false;
 bool IS_GRAVITY = true;
 bool DRAWING_SPRING = false;
-bool CURSOR_LINES = true;
+bool CURSOR_LINES = false;

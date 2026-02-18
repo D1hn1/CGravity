@@ -160,8 +160,8 @@ void repeal_circle(Object *object) {
 				Vector2 deltM = {inter_point->x - mouseV.x, inter_point->y - mouseV.y};
 				float distanceM = sqrt(deltM.x * deltM.x + deltM.y * deltM.y);
 				Vector2 normalM = {deltM.x / distanceM, deltM.y / distanceM};
-				inter_point->x_velocity += normalM.x * 10.0f;
-				inter_point->y_velocity += normalM.y * 10.0f;
+				inter_point->x_velocity += normalM.x * 30.0f;
+				inter_point->y_velocity += normalM.y * 30.0f;
 			}
 		}
 	} else {
