@@ -64,13 +64,13 @@ int main ()
 				Object *inter_object = darray_at(&points, j);
 
 				if (j == i) continue;
-				check_collision(actual_object, inter_object); // TODO: ADD RECTANGLE (SORT OF)
+				check_collision(actual_object, inter_object);
 				
 			}
 
 			// Repeal circle if right click is pressed
 			if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
-				repeal_circle(actual_object); // TODO: ADD RECTANGLE
+				repeal_circle(actual_object);
 
 			// Delete off-screen particles
 			delete_off_screen(actual_object, &points, i);	
