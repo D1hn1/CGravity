@@ -6,7 +6,7 @@ float FRICTION = 0.977f;
 float AIR_FRICTION = 0.98f;
 float RESTITUTION_Y = 150.0f;
 float RESTITUTION_X = 5.0f; // Default 5.0f
-float DAMPING = 0.99f; // Default 0.16f
+float DAMPING = 0.9f; // Default 0.16f
 ObjectType DRAWING = OBJ_POINT;
 
 bool IS_FIXED = false;

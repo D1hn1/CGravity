@@ -42,34 +42,30 @@ void update_spring(Object *object, float dt) {
 		if (actual_spring->p1_blocked && actual_spring->p2_blocked) {
 			if (IS_GRAVITY) {
 
-				Vector2 direction = Vector2Subtract(actual_spring->p1, actual_spring->p2);
-				float distance = Vector2Length(direction);
-				float x = actual_spring->original_length - distance;
+				Point *p1 = actual_spring->p1_point;
+				Point *p2 = actual_spring->p2_point;
 
-				direction.x *= actual_spring->strength * x;
-				direction.y *= actual_spring->strength * x;
+				float dx = p1->x - p2->x;
+				float dy = p1->y - p2->y;
+				float distance = hypot(dx, dy);
+				float displacement = actual_spring->original_length - distance;
+
+				float force = actual_spring->strength * displacement;
+				float fx = (dx / distance) * force;
+				float fy = (dy / distance) * force;
 
 				if (actual_spring->p1_blocked) {
 					if (!actual_spring->p1_point->fixed) {
-						actual_spring->p1_point->x_velocity += direction.x * dt;
-						actual_spring->p1_point->y_velocity += direction.y * dt;
-						actual_spring->p1_point->x_velocity *= DAMPING;
-						actual_spring->p1_point->y_velocity *= DAMPING;
+						p1->x_velocity += fx * DAMPING;
+						p1->y_velocity += fy * DAMPING;
 					}
 				}
-				
-				direction = Vector2Negate(direction);
-				
 				if (actual_spring->p2_blocked) {
 					if (!actual_spring->p2_point->fixed) {
-						actual_spring->p2_point->x_velocity += direction.x * dt;
-						actual_spring->p2_point->y_velocity += direction.y * dt;
-						actual_spring->p2_point->x_velocity *= DAMPING;
-						actual_spring->p2_point->y_velocity *= DAMPING;
+						p2->x_velocity -= fx * DAMPING;
+						p2->y_velocity -= fy * DAMPING;
 					}
 				}
-
-				
 
 			}
 
