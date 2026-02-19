@@ -11,4 +11,5 @@ void draw(Object *object);
 bool menu_shapes(void);
 void draw_info(size_t npoints);
 void draw_cursor_lines();
+void draw_debug(darray *array, size_t object);
 #endif // DRAWING_H

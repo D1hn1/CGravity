@@ -6,5 +6,5 @@
 #ifndef SPRINGS_H
 #define SPRINGS_H
 void spring_logic(Object *object, darray *array);
-void update_spring(Object *object, float dt);
+void update_spring(Object *object);
 #endif // SPRINGS_H

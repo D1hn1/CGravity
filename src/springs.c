@@ -35,7 +35,7 @@ void spring_logic(Object *object, darray *array) {
 	}
 }
 
-void update_spring(Object *object, float dt) {
+void update_spring(Object *object) {
 	if (object->type == OBJ_SPRING) {
 		// Get actual spring
 		Spring *actual_spring = object->as.spring;

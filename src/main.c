@@ -11,11 +11,11 @@
 
 // -**- TODO -**-
 //
-// [        ] FIX THE REPEAL FUNCTION THAT DOESN´T REPEAL THE POINTS WITH 0 X&Y VELOCITY. ( IT WORKS WHEN THERE ARE TWO POINTS )
-// [        ] RESOLVE COLLISIONS WITH RECT - POINT.
 // [        ] REPEAL THE RECTS.
-// [        ] CREATE A FUNCTION TO CREATE A DEBUG STRUCTURE.
-// [        ] REFINE THE SPRING FORMULA
+// [        ] RESOLVE COLLISIONS WITH RECT - POINT.
+// [ DONE.  ] CREATE A FUNCTION TO CREATE A DEBUG STRUCTURE.
+// [ DONE.  ] REFINE THE SPRING FORMULA
+// [ DONE.  ] FIX THE REPEAL FUNCTION THAT DOESN´T REPEAL THE POINTS WITH 0 X&Y VELOCITY. ( IT WORKS WHEN THERE ARE TWO POINTS )
 // [ DONE.  ] ADD A MECHANISM TO DELETE OBJECTS ON SCREEN.
 // [ DONE.  ] DRAW LINES FROM THE WALLS TO THE CURSOR.
 // [ DONE?. ] ADD SPRINGS -> https://github.com/Luke23-45/Coding-a-Spring-Physics-Simulation/blob/main/sp.cc.
@@ -33,6 +33,11 @@ int main ()
 	SetWindowState(FLAG_WINDOW_RESIZABLE); SetTargetFPS(FPS);
 	// Initialize array
 	darray points = darray_init();
+	
+	if (false) {
+		// Draw debug structure
+		draw_debug(&points, 1);
+	}
 
 	while(RUNNING) {
 
@@ -45,7 +50,7 @@ int main ()
 			Object *actual_object = darray_at(&points, i);
 
 			// Check springs
-			update_spring(actual_object, delta);
+			update_spring(actual_object);
 
 			// Update velocity of objects
 			update_velocity(actual_object, delta);
